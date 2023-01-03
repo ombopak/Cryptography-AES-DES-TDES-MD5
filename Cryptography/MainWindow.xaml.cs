@@ -56,8 +56,13 @@ namespace Cryptography
             ICryptoTransform transform = aes.CreateEncryptor();
             byte[] ciphertextBytes = transform.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
 
+
             // Convert the ciphertext to a base64-encoded string
-            string ciphertext = Convert.ToBase64String(ciphertextBytes);
+           string ciphertext = Convert.ToBase64String(ciphertextBytes);
+
+            string asd = BitConverter.ToString(ciphertextBytes).Replace("-", "").ToLower();
+           
+
 
             // Display the ciphertext in the CiphertextTextBox
             cipherTextAES.Text = ciphertext;
@@ -118,12 +123,20 @@ namespace Cryptography
                 Array.Resize(ref keyBytes, 8);
             }
 
+            Debug.WriteLine(plaintextBytes + "THIS IS IT");
+
+
             // Use the DES algorithm to encrypt the plaintext
             DES des = DES.Create();
             des.Key = keyBytes;
             des.IV = keyBytes;
             ICryptoTransform transform = des.CreateEncryptor();
             byte[] ciphertextBytes = transform.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
+
+            
+
+            string asd = BitConverter.ToString(ciphertextBytes).Replace("-", "").ToLower();
+            Debug.WriteLine(asd);
 
             // Convert the ciphertext to a base64-encoded string
             string ciphertext = Convert.ToBase64String(ciphertextBytes);
